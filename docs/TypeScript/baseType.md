@@ -37,6 +37,10 @@ const list2: Array<number> = [1,2,3]
 let x: [string, number]
 x = ['hello', 10]
 x[2] = '越界元素'
+
+let x: [string, number]
+x = ['hello', 10]
+x[3] = 'world' // Tuple type error
 ```
 
 ### 枚举
