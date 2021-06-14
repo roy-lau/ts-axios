@@ -4,7 +4,7 @@
 
 ### [变量声明](./variableDeclaration.md)
 
-### 接口
+### [接口](./interface.md)
 
 ### 类
 
