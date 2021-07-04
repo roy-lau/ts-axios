@@ -75,7 +75,7 @@ list[0] = 100
 ### void
 
 ```ts
-function warnUser(): viod {
+function warnUser(): void {
   console.log('This is my waring message')
 }
 

@@ -10,8 +10,8 @@
 
 ### [函数](./function.md)
 
-### 泛型
+### [泛型](./generics.md)
 
-### 类型推新
+### [类型推新](./typeInference.md)
 
 ### 高级类型
