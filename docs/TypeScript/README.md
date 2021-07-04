@@ -14,4 +14,4 @@
 
 ### [类型推新](./typeInference.md)
 
-### 高级类型
+### [高级类型](./advancedType.md)
