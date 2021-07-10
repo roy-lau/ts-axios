@@ -26,11 +26,28 @@ app
 
 const router = express.Router()
 
-router.get('/simple/get/', (req, res) => {
-  res.json({
-    msg: 'hello world!!!'
+router
+  .get('/simple/get/', (req, res) => {
+    res.json({
+      msg: 'hello world!!!'
+    })
   })
-})
+  .get('/base/get/', (req, res) => {
+    res.json(req.query)
+  })
+  .post('/base/post/', (req, res) => {
+    res.json(req.body)
+  })
+  .post('/base/buffer/', (req, res) => {
+    let msg = []
+    req.on('data', chunk => {
+      if (chunk) msg.push(chunk)
+    })
+    req.on('end', () => {
+      let buf = Buffer.concat(msg)
+      res.json(buf.toJSON())
+    })
+  })
 
 app.use(router)
 
