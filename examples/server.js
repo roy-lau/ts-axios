@@ -28,13 +28,12 @@ const router = express.Router()
 
 router
   .get('/simple/get/', (req, res) => {
-    res.json({
-      msg: 'hello world!!!'
-    })
+    res.json({ msg: 'hello world!!!', success: true })
   })
   .get('/base/get/', (req, res) => {
     res.json(req.query)
   })
+
   .post('/base/post/', (req, res) => {
     res.json(req.body)
   })
@@ -47,6 +46,20 @@ router
       let buf = Buffer.concat(msg)
       res.json(buf.toJSON())
     })
+  })
+
+  .get('/error/get/', (req, res) => {
+    if (Math.random() > 0.5) {
+      res.json({ success: true })
+    } else {
+      res.status(500)
+      res.end()
+    }
+  })
+  .get('/error/timeout/', (req, res) => {
+    setTimeout(() => {
+      res.json({ msg: 'timeout ok', success: true })
+    }, 3000)
   })
 
 app.use(router)
