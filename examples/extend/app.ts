@@ -4,7 +4,7 @@ import axios from '@/index'
  * axios 函数 post 请求
  */
 axios({
-  method: 'psot',
+  method: 'post',
   url: '/extend/post',
   data: { say: 'hi' }
 })
@@ -13,7 +13,7 @@ axios({
  * axios.request 函数 post 请求
  */
 axios.request({
-  method: 'psot',
+  method: 'post',
   url: '/extend/post',
   data: { say: 'hello' }
 })
@@ -22,7 +22,7 @@ axios.request({
  * axios.request 函数 post 请求（url 独立出来）
  */
 axios.request('/extend/post', {
-  method: 'psot',
+  method: 'post',
   data: { say: 'hello1' }
 })
 
