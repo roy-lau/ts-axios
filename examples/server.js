@@ -95,6 +95,10 @@ router
       }
     })
   })
+  
+  .get('/interceptor/get', (req, res) => {
+    res.end('number value: ')
+  })
 
 app.use(router)
 

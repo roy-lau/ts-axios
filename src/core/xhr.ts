@@ -2,6 +2,11 @@ import { parseHeaders } from '../helper/headers'
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import { createError } from '../helper/error'
 
+/**
+ * 发送 xhr 请求
+ * @param config 配置信息
+ * @returns promise
+ */
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     // 获取配置信息
