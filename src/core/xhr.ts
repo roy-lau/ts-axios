@@ -1,6 +1,6 @@
-import { parseHeaders } from './helper/headers'
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
-import { createError } from './helper/error'
+import { parseHeaders } from '../helper/headers'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
+import { createError } from '../helper/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     /**
      * 发送 xhr 请求
      */
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
 
     /**
      * 监听请求响应的状态变化
