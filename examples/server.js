@@ -95,13 +95,24 @@ router
       }
     })
   })
-  
+
   .get('/interceptor/get', (req, res) => {
     res.end('number value: ')
   })
 
   .post('/config/post', (req, res) => {
     res.json(req.body)
+  })
+
+  .get('/cancel/get', (req, res) => {
+    setTimeout(() => {
+      res.json({ say: 'hello!!!' })
+    }, 1000);
+  })
+  .post('/cancel/post', (req, res) => {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 1000);
   })
 
 

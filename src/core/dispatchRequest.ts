@@ -5,6 +5,7 @@ import transform from './transform'
 import xhr from './xhr'
 
 export default function axios(config: AxiosRequestConfig): AxiosPromise {
+  throwIfCancellationRequested(config)
   processConfig(config)
   return xhr(config).then(res => {
     return transformResponseData(res)
@@ -42,4 +43,15 @@ function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transform(res.data, res.headers, res.config.transformResponse)
 
   return res
+}
+
+/**
+ * 请求取消函数
+ * 如果已经取消过请求，将不会再取消请求
+ * @param config 请求配置信息
+ */
+function throwIfCancellationRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested()
+  }
 }
