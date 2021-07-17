@@ -1,4 +1,5 @@
-import { isPlainObject } from './utils'
+import { deepMerge, isPlainObject } from './utils'
+import { Method } from '../types'
 
 /**
  * 转换（归一化）请求头的名称 key，name
@@ -56,4 +57,24 @@ export function parseHeaders(headers: string): any {
   })
 
   return parsed
+}
+
+/**
+ * 根据请求方法配置 headers
+ * @param headers 请求头部配置
+ * @param method 请求方法
+ * @returns
+ */
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) return headers
+
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

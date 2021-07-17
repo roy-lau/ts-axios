@@ -25,3 +25,7 @@ git clone https://github.com/alexjoverm/typescript-library-starter.git ts-axios
 cd ts-axios
 npm install && yarn
 ```
+
+**参考**
+
+https://github.com/ustbhuangyi/ts-axios-doc

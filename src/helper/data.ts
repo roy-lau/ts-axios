@@ -6,7 +6,7 @@ import { isPlainObject } from './utils'
  * @param data body 的请求体
  * @returns stringify json
  */
-export function transfromRequest(data: any): any {
+export function transformRequest(data: any): any {
   return isPlainObject(data) ? JSON.stringify(data) : data
 }
 
@@ -16,7 +16,7 @@ export function transfromRequest(data: any): any {
  * @param data 响应数据
  * @returns 解析后的响应数据 JSON.parse
  */
-export function transfromResponse(data: any): any {
+export function transformResponse(data: any): any {
   if (typeof data === 'string') {
     try {
       data = JSON.parse(data)

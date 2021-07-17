@@ -25,6 +25,10 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
+
+  [propName: string]: any
 }
 
 /**
@@ -59,6 +63,8 @@ export interface AxiosError extends Error {
  * axios 函数接口配置
  */
 export interface Axios {
+  defaults: AxiosRequestConfig
+
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
@@ -85,6 +91,13 @@ export interface AxiosInstance extends Axios {
 }
 
 /**
+ * axios 静态接口配置
+ */
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance
+}
+
+/**
  * axsio 拦截器
  */
 export interface AxiosInterceptorManager<T> {
@@ -99,4 +112,8 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }
