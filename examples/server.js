@@ -1,9 +1,16 @@
+const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const multipart = require('connect-multiparty')
+const uuid = require('uuid/v4')
+const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WabpackConfig = require('./webpack.config')
+
+require('./server2') // 运行 server2 服务
 
 const app = express()
 const compiler = webpack(WabpackConfig)
@@ -19,10 +26,20 @@ app
 
   .use(webpackHotMiddleware(compiler))
 
-  .use(express.static(__dirname))
+  .use(express.static(__dirname, {
+    setHeaders(res) { // 向客户端种 cookie
+      res.cookie('XSRF-TOKEN-D', 'uuid_' + uuid())
+    }
+  }))
 
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
+
+  .use(cookieParser())
+
+  .use(multipart({
+    uploadDir: path.resolve(__dirname, 'upload-file')
+  }))
 
 const router = express.Router()
 
@@ -115,6 +132,38 @@ router
     }, 1000);
   })
 
+  .get('/more/get', (req, res) => {
+    res.json(req.cookies)
+  })
+  // 上传文件
+  .post('/more/upload', (req, res) => {
+    console.log(req.body, req.files)
+    res.end('upload success')
+  })
+  // auth 鉴权
+  .post('/more/post', (req, res) => {
+    const auth = req.headers.authorization
+    const [type, credentials] = auth.split(' ')
+    console.log('auth data: ', atob(credentials))
+    const [username, password] = atob(credentials).split(':')
+    if (type === 'Basic' && username === 'Yee' && password === 'eeY') {
+      res.json(req.body)
+    } else {
+      res.status(401)
+      res.end('UnAuthorization')
+    }
+  })
+  .get('/more/304', (req, res) => {
+    res.status(304)
+    res.end()
+  })
+
+  .get('/more/A',(req,res)=>{
+    res.end("A")
+  })
+  .get('/more/B',(req,res)=>{
+    res.end("B")
+  })
 
 app.use(router)
 
