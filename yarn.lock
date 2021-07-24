@@ -4411,7 +4411,7 @@ humanize-ms@^1.2.1:
 
 husky@^7.0.1:
   version "7.0.1"
-  resolved "https://registry.nlark.com/husky/download/husky-7.0.1.tgz?cache=0&sync_timestamp=1625567309348&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fhusky%2Fdownload%2Fhusky-7.0.1.tgz#579f4180b5da4520263e8713cc832942b48e1f1c"
+  resolved "https://registry.nlark.com/husky/download/husky-7.0.1.tgz#579f4180b5da4520263e8713cc832942b48e1f1c"
   integrity sha1-V59BgLXaRSAmPocTzIMpQrSOHxw=
 
 i@0.3.x:

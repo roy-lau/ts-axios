@@ -170,6 +170,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         cancelToken.promise.then(reason => {
           request.abort()
           reject(reason)
+        }).catch(() => {
+          // do nothing
         })
       }
     }
